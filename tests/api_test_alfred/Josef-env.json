@@ -1,0 +1,54 @@
+{
+	"id": "d2d7f191-af08-448d-a404-e1f7e4afa088",
+	"name": "Environment - Josef",
+	"values": [
+		{
+			"key": "url",
+			"value": "http://localhost:3000",
+			"enabled": true
+		},
+		{
+			"key": "id1",
+			"value": "6",
+			"enabled": true
+		},
+		{
+			"key": "property1",
+			"value": "Thor",
+			"enabled": true
+		},
+		{
+			"key": "id2",
+			"value": "7",
+			"enabled": true
+		},
+		{
+			"key": "property2",
+			"value": "Loki",
+			"enabled": true
+		},
+		{
+			"key": "fname",
+			"value": "alfred",
+			"enabled": true
+		},
+		{
+			"key": "lname",
+			"value": "dyas",
+			"enabled": true
+		},
+		{
+			"key": "updatePropertyValue",
+			"value": "hulk",
+			"enabled": true
+		},
+		{
+			"key": "updatedIdValue",
+			"value": "100",
+			"enabled": true
+		}
+	],
+	"_postman_variable_scope": "environment",
+	"_postman_exported_at": "2021-12-18T09:56:20.945Z",
+	"_postman_exported_using": "Postman/8.12.4"
+}
