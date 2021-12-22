@@ -1,0 +1,625 @@
+{
+	"info": {
+		"_postman_id": "f90c88c7-1644-454d-9edd-d87f935ea389",
+		"name": "Josef Copy",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Create tests",
+			"item": [
+				{
+					"name": "Create Entity With Empty Request Body",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 201\", function () {\r",
+									"    pm.response.to.have.status(201);\r",
+									"});\r",
+									"pm.test(\"Create an entity with request body as blank\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.id).to.eql(3);\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/entities",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"entities"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Entity With ID only in Request Body",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 201\", function () {\r",
+									"    pm.response.to.have.status(201);\r",
+									"});\r",
+									"pm.test(\"Created en entity with only id as \"+pm.variables.get(\"id2\") +\" successfully\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.id).to.eql(+pm.variables.get(\"id2\"));\r",
+									"});\r",
+									"\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": " {\r\n        \"id\":{{id2}}       \r\n }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/entities",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"entities"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Entity With Property Only in Request Body Copy",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 201\", function () {\r",
+									"    pm.response.to.have.status(201);\r",
+									"});\r",
+									"pm.test(\"Created en entity with only property as \"+pm.variables.get(\"property2\") +\" successfully\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.property).to.eql(pm.variables.get(\"property2\"));\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": " {\r\n        \"property\": \"{{property2}}\"       \r\n }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/entities",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"entities"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Entity With Request Body",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 201\", function () {\r",
+									"    pm.response.to.have.status(201);\r",
+									"});\r",
+									"pm.test(\"Created en entity with id as \"+pm.variables.get(\"id1\") +\" successfully\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.id).to.eql(+pm.variables.get(\"id1\"));\r",
+									"});\r",
+									"pm.test(\"Created en entity with property as \"+pm.variables.get(\"property1\")+\" successfully\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.property).to.eql(pm.variables.get(\"property1\"));\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": " {\r\n        \"id\":{{id1}},\r\n        \"property\": \"{{property1}}\"\r\n }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/entities",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"entities"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Entity With Request Body as a collection of entities",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Can successfully create an entity with a collection \", function () {\r",
+									"    pm.response.to.have.status(201);\r",
+									"});\r",
+									"\r",
+									"/*var id1 = +pm.environment.id1;\r",
+									"var id2 = pm.environment.id2; \r",
+									"var property1 = pm.environment.property1; \r",
+									"var property2 = pm.environment.property2; \r",
+									"\r",
+									"pm.test(\"Your test name\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.have.to.eql(id1);\r",
+									"});\r",
+									"*/"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": " [\r\n     {\r\n        \"id\":{{id1}},\r\n        \"property\": \"{{property1}}\"\r\n },\r\n  {\r\n        \"id\":{{id2}},\r\n        \"property\": \"{{property2}}\"\r\n }\r\n ]",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/entities",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"entities"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Entity With Request Body as a collection of any unique value",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 201\", function () {\r",
+									"    pm.response.to.have.status(201);\r",
+									"});\r",
+									"pm.test(\"Property fname created successuly\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.fname).to.eql(pm.variables.get(\"fname\"));\r",
+									"});\r",
+									"pm.test(\"Property lname created successuly\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.lastname).to.eql(pm.variables.get(\"lname\"));\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": " {\r\n        \"fname\":\"{{fname}}\",\r\n        \"lastname\": \"{{lname}}\"\r\n }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/entities",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"entities"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Entity With Duplicate Property in Request Body",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 201\", function () {\r",
+									"    pm.response.to.have.status(201);\r",
+									"});\r",
+									"pm.test(\"Created en entity with duplicate property  \"+pm.variables.get(\"property2\") +\" successfully\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.property).to.eql(pm.variables.get(\"property2\"));\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": " {\r\n        \"property\": \"{{property2}}\"       \r\n }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/entities",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"entities"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Entity With Request Body with Duplicate ID",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 500 since it is a duplicate id \", function () {\r",
+									"    pm.response.to.have.status(500);\r",
+									"});\r",
+									"pm.test(\"Duplicate error message is returned \", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"Error: Insert failed, duplicate id\");\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": " {\r\n        \"id\":{{id1}},\r\n        \"property\": \"{{property1}}\"\r\n }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/entities",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"entities"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Get Tests",
+			"item": [
+				{
+					"name": "Get All Entities",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"pm.test(\"Test first initial entity id value for Get All Entities is equal to 1 \", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData[0].id).to.eql(1);\r",
+									"});\r",
+									"pm.test(\"Test first initial entity property value for Get All Entities is foo\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData[0].property).to.eql(\"foo\");\r",
+									"});\r",
+									"pm.test(\"Test second  initial entity id value for Get All Entities is 2 \", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData[1].id).to.eql(2);\r",
+									"});\r",
+									"pm.test(\"Test first initial entity property value for Get All Entities is bar \", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData[1].property).to.eql(\"bar\");\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/entities",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"entities"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Entity with ID",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200 for Get Entity with ID\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"var id = +pm.environment.get(\"id1\");\r",
+									"pm.test(\"Entity with id  \" + id + \" retrieved successfully\" , function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.id).to.eql(id);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/entities/{{id1}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"entities",
+								"{{id1}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Update Tests",
+			"item": [
+				{
+					"name": "Update Entity",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200 for Update Entity\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"var id = pm.environment.get(\"id1\");\r",
+									"var updatedValue = pm.environment.get(\"updatePropertyValue\");\r",
+									"\r",
+									"pm.test(\"Successfully Updated Entity with id \"+ id + \" to have property value as \" + updatedValue , function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.property).to.eql(updatedValue);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"property\": \"{{updatePropertyValue}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/entities/{{id1}}",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"entities",
+								"{{id1}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Delete tests",
+			"item": [
+				{
+					"name": "Get Entity with ID",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200 for Get Entity with ID\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/entities/{{id1}}",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"entities",
+								"{{id1}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Entity",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var id = pm.environment.get(\"id1\");\r",
+									"pm.test(\"Status code is 200 - Deletion of \"+id +\" was successfull \", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/entities/{{id1}}",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"entities",
+								"{{id1}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Entity with Deleted ID",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 404 for Get Entity with ID\", function () {\r",
+									"    pm.response.to.have.status(404);\r",
+									"});\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/entities/{{id1}}",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"entities",
+								"{{id1}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
